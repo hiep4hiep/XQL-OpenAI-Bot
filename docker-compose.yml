@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  xql_bot:
+    container_name: xql_bot
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    volumes:
+    - .:/var/lib/xqlbot
+    command: sh -c 'python3 slack_bot_v2.py'

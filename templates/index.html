@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <title>XQL Query Bot Tester</title>
+      <!-- Custom fonts for this template-->
+      <link
+         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+         rel="stylesheet">
+      <!-- Custom styles for this template-->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+      <meta name="_token" content="{{ csrf_token }}">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+   </head>
+   <body>
+      <!-- Begin Page Content -->
+      <!-- Page Heading -->
+      <!-- Content Row -->
+      <div class="jumbotron text-center" style="margin-bottom:0">
+         <h1>XQL Query Bot Tester</h1>
+      </div>
+      <div class="container">
+         <div class="row">
+            <div class="container-sm">
+               <br>
+               <p style="color:#214d7f; margin:0px"><b>Question</b></p>
+               <input id="question" type="text" class="form-control" style='width: 1000px;' placeholder="Enter your request to build XQL here">
+            </div>
+         </div>
+         <div class="row">
+            <div class="container-sm">
+               <br>
+               <button id="submit" type="button" class="btn btn-primary">Ask the Bot</button>
+            </div>
+         </div>
+         <div class="row">
+            <div class="container-sm">
+               <br>
+               <p style="color:#214d7f; margin:0px"><b>XQL Query</b></p>
+               <textarea readonly id="answer" class="form-control" style='width: 1000px;' placeholder="Bot will generate XQL here"></textarea>
+            </div>
+         </div>
+      </div>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      <script>
+         $("#submit").click(function(e) {
+               e.preventDefault();
+               let question = $('#question').val();
+               if (question.length !== 0) {
+                   jsonData = JSON.stringify({
+                       "text": question
+                   });
+
+                   $.ajax({
+                       type: "POST",
+                       contentType: 'application/json; charset=utf-8',
+                       dataType: "json",
+                       url: "/ask",
+                       data: jsonData,
+                       success: function(result) {
+                           $("#answer").text(result["message"]);
+                       },
+                       error: function(result) {
+                           $("#answer").text("Error getting XQL result, please try again")
+                           alert(result["responseJSON"]["message"]);
+                       }
+                   })
+               }
+           })
+      </script>
+   </body>
+</html>
