@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 import json
 import uuid
+from waitress import serve
 
 load_dotenv()
 SLACK_TOKEN = os.getenv('SLACK_TOKEN')
@@ -149,4 +150,4 @@ def web():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    serve(app, host="0.0.0.0", port=5080)
