@@ -1,5 +1,5 @@
 # Slack-Bot-OpenAI-Cortex
-Slack Bot who can generate Cortex XDR XQL query
+Slack Bot who can generate Cortex XDR XQL query 
 
 ## Generate OpenAI API Token
 Register an account and generate OpenAI API Token here https://beta.openai.com/account/api-keys
